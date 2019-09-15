@@ -44,6 +44,11 @@ def add_ip(ip, ipset):
     subprocess.call(['/bin/ipset', 'add', '-exist', ipset, ip])
 
 
+# Remove an IP/CIDR from specified set
+def remove_ip(ip, ipset)
+    subprocess.call(['/bin/ipset', 'del', '-exist', ipset, ip])
+
+
 # Return (python) set containing the IPs from specified (ipset) set
 def get_ipset(ipset):
     result = subprocess.run(['/bin/ipset', 'list', ipset], stdout=subprocess.PIPE)
