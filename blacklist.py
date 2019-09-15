@@ -30,8 +30,8 @@ def download_list(url):
 
 
 # Return (python) set containing the IPs from specified (ipset) set
-def get_ipset(ipset):
-    result = subprocess.run(['/bin/ipset', 'list', ipset], stdout=subprocess.PIPE)
+def get_ipset(name):
+    result = subprocess.run(['/bin/ipset', 'list', name], stdout=subprocess.PIPE)
     items = set()
     for line in result.stdout.splitlines():
         m = re.match('(?:\d+\.){3}\d+(?:\\\d+)?', line.decode('utf-8'))
