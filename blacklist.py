@@ -36,6 +36,7 @@ def create_ipset(name):
 
 # Return (python) set containing the IPs from specified (ipset) set
 def get_ipset(name):
+    create_ipset(name)
     result = subprocess.run(['/bin/ipset', 'list', name], stdout=subprocess.PIPE)
     items = set()
     for line in result.stdout.splitlines():
