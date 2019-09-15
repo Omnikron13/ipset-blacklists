@@ -29,6 +29,11 @@ def download_list(url):
     return items
 
 
+# Adds a new set, failing silently if it already exists
+def create_ipset(name):
+    subprocess.call(['/bin/ipset', 'create', name, 'hash:net', '-exist'])
+
+
 # Return (python) set containing the IPs from specified (ipset) set
 def get_ipset(name):
     result = subprocess.run(['/bin/ipset', 'list', name], stdout=subprocess.PIPE)
