@@ -42,7 +42,7 @@ def get_ipset(ipset):
 
 
 # Update an ipset to match contents of given blacklist
-def set_ipset(blacklist, ipsetname):
+def set_ipset(ipsetname, blacklist):
     ipset = get_ipset(ipsetname)
     for ip in diff(blacklist, ipset):
         add_ip(ip, ipsetname)
