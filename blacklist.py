@@ -44,3 +44,15 @@ def add_ip(ip, ipset):
     subprocess.call(['/bin/ipset', 'add', '-exist', ipset, ip])
 
 
+# Return (python) set containing the IPs from specified (ipset) set
+def get_ipset(ipset):
+    result = subprocess.run(['/bin/ipset', 'list', ipset], stdout=subprocess.PIPE)
+    items = set()
+    for line in result.stdout.splitlines():
+        m = re.match('(?:\d+\.){3}\d+(?:\\\d+)?', line.decode('utf-8'))
+        if m is None:
+            continue
+        items.add(m.string)
+    return items
+
+
