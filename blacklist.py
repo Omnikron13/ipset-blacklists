@@ -71,5 +71,11 @@ def diff(a, b):
     return {i for i in a if i not in b}
 
 
+# Iterate ipsets dictionary and update ipsets based on the latest version of source lists.
+def update_ipsets(ipsets):
+    for k, v in ipsets.items():
+        blacklist = download_list(v)
+        # TODO: config up the prefix
+        set_ipset(f'Blacklist.{k}', blacklist)
 
 
