@@ -65,10 +65,5 @@ def diff(a, b):
     return {i for i in a if i not in b}
 
 
-# Add list (/set/etc.) to specified set
-def add_ip_list(list, ipset):
-    # TODO: add/remove differences?
-    for ip in list:
-        add_ip(ip, ipset)
 
 
