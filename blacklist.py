@@ -26,9 +26,6 @@ def download_list(url):
         if m is None:
             continue
         items.add(m.string)
-    items = list(items)
-    # TODO: does this even need to be sorted?
-    items.sort()
     return items
 
 
