@@ -29,11 +29,16 @@ def download_list(url):
     return items
 
 
-# Add list (/set/etc.) to specified set
-def add_ip_list(list, ipset):
-    # TODO: add/remove differences?
-    for ip in list:
-        add_ip(ip, ipset)
+# Return (python) set containing the IPs from specified (ipset) set
+def get_ipset(ipset):
+    result = subprocess.run(['/bin/ipset', 'list', ipset], stdout=subprocess.PIPE)
+    items = set()
+    for line in result.stdout.splitlines():
+        m = re.match('(?:\d+\.){3}\d+(?:\\\d+)?', line.decode('utf-8'))
+        if m is None:
+            continue
+        items.add(m.string)
+    return items
 
 
 # Update an ipset to match contents of given blacklist
@@ -55,20 +60,15 @@ def remove_ip(ip, ipset):
     subprocess.call(['/bin/ipset', 'del', '-exist', ipset, ip])
 
 
-# Return (python) set containing the IPs from specified (ipset) set
-def get_ipset(ipset):
-    result = subprocess.run(['/bin/ipset', 'list', ipset], stdout=subprocess.PIPE)
-    items = set()
-    for line in result.stdout.splitlines():
-        m = re.match('(?:\d+\.){3}\d+(?:\\\d+)?', line.decode('utf-8'))
-        if m is None:
-            continue
-        items.add(m.string)
-    return items
-
-
 # Return set of items in a which are not in b
 def diff(a, b):
     return {i for i in a if i not in b}
+
+
+# Add list (/set/etc.) to specified set
+def add_ip_list(list, ipset):
+    # TODO: add/remove differences?
+    for ip in list:
+        add_ip(ip, ipset)
 
 
