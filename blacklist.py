@@ -45,7 +45,7 @@ def add_ip(ip, ipset):
 
 
 # Remove an IP/CIDR from specified set
-def remove_ip(ip, ipset)
+def remove_ip(ip, ipset):
     subprocess.call(['/bin/ipset', 'del', '-exist', ipset, ip])
 
 
