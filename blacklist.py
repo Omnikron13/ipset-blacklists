@@ -56,3 +56,8 @@ def get_ipset(ipset):
     return items
 
 
+# Return set of items in a which are not in b
+def diff(a, b):
+    return {i for i in a if i not in b}
+
+
