@@ -10,9 +10,13 @@ from urllib.request import urlopen
 # easily with relative paths.
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
+# Absolute paths should be used if changing this, unless the new file
+# is placed in this dir.
 CONFIG_FILE = 'config.toml'
-CIDR_REGEX = '^(?:\d{1,3}\.){3}\d{1,3}(?:/\d{1,2})?$'
 
+# This regex only really provides a rough matching capability, and will match
+# on numbers >255 & subnets >32, but is probably faster than being more anal.
+CIDR_REGEX = '^(?:\d{1,3}\.){3}\d{1,3}(?:/\d{1,2})?$'
 
 # Make configuration settings globally available
 conf = toml.load(CONFIG_FILE)
