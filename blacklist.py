@@ -32,13 +32,15 @@ def download_list(url):
 
 # Adds a new set, failing silently if it already exists
 def create_ipset(name):
-    subprocess.call(['/bin/ipset', 'create', name, 'hash:net', '-exist'])
+    bin = conf['ipset']['binary']
+    subprocess.call([bin, 'create', name, 'hash:net', '-exist'])
 
 
 # Return (python) set containing the IPs from specified (ipset) set
 def get_ipset(name):
     create_ipset(name)
-    result = subprocess.run(['/bin/ipset', 'list', name], stdout=subprocess.PIPE)
+    bin = conf['ipset']['binary']
+    result = subprocess.run([bin, 'list', name], stdout=subprocess.PIPE)
     items = set()
     for line in result.stdout.splitlines():
         m = re.match(CIDR_REGEX, line.decode('utf-8'))
@@ -59,12 +61,14 @@ def set_ipset(ipsetname, blacklist):
 
 # Add an IP/CIDR to specified set
 def add_ip(ip, ipset):
-    subprocess.call(['/bin/ipset', 'add', '-exist', ipset, ip])
+    bin = conf['ipset']['binary']
+    subprocess.call([bin, 'add', '-exist', ipset, ip])
 
 
 # Remove an IP/CIDR from specified set
 def remove_ip(ip, ipset):
-    subprocess.call(['/bin/ipset', 'del', '-exist', ipset, ip])
+    bin = conf['ipset']['binary']
+    subprocess.call([bin, 'del', '-exist', ipset, ip])
 
 
 # Return set of items in a which are not in b
