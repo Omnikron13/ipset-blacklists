@@ -1,9 +1,14 @@
 #!/bin/python
 
+import os
 import re
 import subprocess
 import toml
 from urllib.request import urlopen
+
+# Switch cwd to the dir this script is in, so config files etc. can be read
+# easily with relative paths.
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 CONFIG_FILE = 'config.toml'
 CIDR_REGEX = '^(?:\d{1,3}\.){3}\d{1,3}(?:/\d{1,2})?$'
