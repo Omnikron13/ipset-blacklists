@@ -62,13 +62,13 @@ def set_ipset(ipsetname, blacklist):
 # Add an IP/CIDR to specified set
 def add_ip(ip, ipset):
     bin = conf['ipset']['binary']
-    subprocess.call([bin, 'add', '-exist', ipset, ip])
+    subprocess.call([bin, 'add', ipset, ip, '-exist'])
 
 
 # Remove an IP/CIDR from specified set
 def remove_ip(ip, ipset):
     bin = conf['ipset']['binary']
-    subprocess.call([bin, 'del', '-exist', ipset, ip])
+    subprocess.call([bin, 'del', ipset, ip, '-exist'])
 
 
 # Return set of items in a which are not in b
