@@ -4,6 +4,7 @@ import re
 import subprocess
 from urllib.request import urlopen
 
+CIDR_REGEX = '^(?:\d{1,3}\.){3}\d{1,3}(?:/\d{1,2})?$'
 
 
 # Return a list of IPs/CIDR from a URL
@@ -16,7 +17,7 @@ def download_list(url):
     items = set()
     for line in http:
         line = line.rstrip()
-        m = re.match('(?:\d+\.){3}\d+(?:\\\d+)?', line.decode(charset))
+        m = re.match(CIDR_REGEX, line.decode(charset))
         if m is None:
             continue
         items.add(m.string)
@@ -34,7 +35,7 @@ def get_ipset(name):
     result = subprocess.run(['/bin/ipset', 'list', name], stdout=subprocess.PIPE)
     items = set()
     for line in result.stdout.splitlines():
-        m = re.match('(?:\d+\.){3}\d+(?:\\\d+)?', line.decode('utf-8'))
+        m = re.match(CIDR_REGEX, line.decode('utf-8'))
         if m is None:
             continue
         items.add(m.string)
