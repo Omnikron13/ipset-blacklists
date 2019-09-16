@@ -1,5 +1,6 @@
 [Unit]
 Description=Updates ipsets which feed the iptables BLACKLIST chain
+Requires=iptables.service
 After=iptables.service
 After=ipset.service
 
