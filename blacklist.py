@@ -43,7 +43,7 @@ def get_ipset(name):
     result = subprocess.run([bin, 'list', name], stdout=subprocess.PIPE)
     items = set()
     for line in result.stdout.splitlines():
-        m = re.match(CIDR_REGEX, line.decode('utf-8'))
+        m = re.match(CIDR_REGEX, line.decode())
         if m is None:
             continue
         items.add(m.string)
