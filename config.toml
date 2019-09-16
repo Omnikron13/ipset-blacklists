@@ -1,6 +1,6 @@
 [ipset]
 # Prepended to the ipset set names (e.g. Blacklist.CINSArmy)
-prefix='Blacklist'
+prefix = 'Blacklist'
 
 [blacklists]
 # Large blacklist of 15,000 IPs, updated hourly
