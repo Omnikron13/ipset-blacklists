@@ -4,12 +4,6 @@ import re
 import subprocess
 from urllib.request import urlopen
 
-lists = {
-    'CINSArmy' : 'http://cinsscore.com/list/ci-badguys.txt',
-    'MyIP.ms'  : 'http://myip.ms/files/blacklist/csf/latest_blacklist.txt',
-    'tyrael'   : 'http://tyrael.local/blacklist.txt',
-    #'': '',
-}
 
 
 # Return a list of IPs/CIDR from a URL
