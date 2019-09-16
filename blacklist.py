@@ -9,6 +9,10 @@ CONFIG_FILE = 'config.toml'
 CIDR_REGEX = '^(?:\d{1,3}\.){3}\d{1,3}(?:/\d{1,2})?$'
 
 
+# Make configuration settings globally available
+conf = toml.load(CONFIG_FILE)
+
+
 # Return a list of IPs/CIDR from a URL
 def download_list(url):
     http = urlopen(url)
