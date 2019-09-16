@@ -1,8 +1,12 @@
 [ipset]
+# Full path to the ipset binary
+binary = '/bin/ipset'
 # Prepended to the ipset set names (e.g. Blacklist.CINSArmy)
 prefix = 'Blacklist'
 
 [iptables]
+# Full path to the iptables binary
+binary = '/bin/iptables'
 # Name of the iptables chain to add the ipset blacklists to
 chain = 'BLACKLIST'
 
