@@ -96,7 +96,7 @@ def iptables_rule_exists(name):
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
-    if r is 1:
-        return False
-    return True
+    if r is 0:
+        return True
+    return False
 
