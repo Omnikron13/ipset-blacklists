@@ -87,6 +87,7 @@ def update_ipsets(ipsets):
         blacklist = download_list(v)
         prefix = conf['ipset']['prefix']
         set_ipset(f'{prefix}.{k}', blacklist)
+        iptables_rule_add(k)
 
 
 # Add specified blacklist set to the iptables chain
