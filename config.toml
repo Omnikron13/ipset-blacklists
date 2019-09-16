@@ -1,3 +1,6 @@
+[ipset]
+prefix='Blacklist'
+
 [blacklists]
 # Large blacklist of 15,000 IPs, updated hourly
 CINSArmy = 'http://cinsscore.com/list/ci-badguys.txt'
