@@ -1,0 +1,11 @@
+[Unit]
+Description=Run ipset-blacklists every day to keep the firewall up to date
+
+[Timer]
+OnBootSec=1min
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+
