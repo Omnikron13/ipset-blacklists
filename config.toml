@@ -1,0 +1,10 @@
+[blacklists]
+# Large blacklist of 15,000 IPs, updated hourly
+CINSArmy = 'http://cinsscore.com/list/ci-badguys.txt'
+
+# A much smaller list of ~1000 IPs, with little to no overlap with CINSArmy
+'MyIP.ms'= 'http://myip.ms/files/blacklist/csf/latest_blacklist.txt'
+
+# Bogons list from team-cymru.com, modified to remove 192.168.0.0/16 so LAN works properly
+bogons   = 'file:bogons.blacklist'
+
