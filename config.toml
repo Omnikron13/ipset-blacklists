@@ -1,4 +1,5 @@
 [ipset]
+# Prepended to the ipset set names (e.g. Blacklist.CINSArmy)
 prefix='Blacklist'
 
 [blacklists]
