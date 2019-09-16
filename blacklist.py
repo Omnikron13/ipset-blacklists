@@ -85,8 +85,7 @@ def intersect(a, b):
 def update_ipsets(ipsets):
     for k, v in ipsets.items():
         blacklist = download_list(v)
-        # TODO: decide how to handle where config is loaded form, and when it is loaded
-        prefix = toml.load(CONFIG_FILE)['ipset']['prefix']
+        prefix = conf['ipset']['prefix']
         set_ipset(f'{prefix}.{k}', blacklist)
 
 
