@@ -89,6 +89,21 @@ def update_ipsets(ipsets):
         set_ipset(f'{prefix}.{k}', blacklist)
 
 
+# Add specified blacklist set to the iptables chain
+def iptables_rule_add(name):
+    # Don't duplicate the rule
+    if(iptables_rule_exists(name)):
+        return
+    bin = conf['iptables']['binary']
+    chain = conf['iptables']['chain']
+    prefix = conf['ipset']['prefix']
+    subprocess.call(
+        [bin, '-A', chain, '-m', 'set', '--match-set', f'{prefix}.{name}', 'src', '-j', 'DROP'],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
 # Checks if an ipset blacklist is already attached to the iptables chain
 def iptables_rule_exists(name):
     bin = conf['iptables']['binary']
