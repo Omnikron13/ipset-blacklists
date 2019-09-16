@@ -2,6 +2,10 @@
 # Prepended to the ipset set names (e.g. Blacklist.CINSArmy)
 prefix = 'Blacklist'
 
+[iptables]
+# Name of the iptables chain to add the ipset blacklists to
+chain = 'BLACKLIST'
+
 [blacklists]
 # Large blacklist of 15,000 IPs, updated hourly
 CINSArmy = 'http://cinsscore.com/list/ci-badguys.txt'
