@@ -66,6 +66,11 @@ def diff(a, b):
     return {i for i in a if i not in b}
 
 
+# Complement to the diff() function above
+def intersect(a, b):
+    return {i for i in a if i in a and i in b}
+
+
 # Iterate ipsets dictionary and update ipsets based on the latest version of source lists.
 def update_ipsets(ipsets):
     for k, v in ipsets.items():
