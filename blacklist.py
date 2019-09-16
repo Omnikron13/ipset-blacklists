@@ -2,8 +2,10 @@
 
 import re
 import subprocess
+import toml
 from urllib.request import urlopen
 
+CONFIG_FILE = 'config.toml'
 CIDR_REGEX = '^(?:\d{1,3}\.){3}\d{1,3}(?:/\d{1,2})?$'
 
 
@@ -75,7 +77,8 @@ def intersect(a, b):
 def update_ipsets(ipsets):
     for k, v in ipsets.items():
         blacklist = download_list(v)
-        # TODO: config up the prefix
-        set_ipset(f'Blacklist.{k}', blacklist)
+        # TODO: decide how to handle where config is loaded form, and when it is loaded
+        prefix = toml.load(CONFIG_FILE)['ipset']['prefix']
+        set_ipset(f'{prefix}.{k}', blacklist)
 
 
