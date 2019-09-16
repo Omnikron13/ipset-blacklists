@@ -1,0 +1,9 @@
+[Unit]
+Description=Updates ipsets which feed the iptables BLACKLIST chain
+After=iptables.service
+After=ipset.service
+
+[Service]
+Type=simple
+ExecStart=/bin/python /usr/bin/ipset-blacklists/main.py
+
