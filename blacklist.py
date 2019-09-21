@@ -75,12 +75,14 @@ def set_ipset(ipsetname, blacklist):
 
 # Add an IP/CIDR to specified set
 def add_ip(ip, ipset):
+    print("Adding IP: %s" % ip)
     bin = conf['ipset']['binary']
     subprocess.call([bin, 'add', ipset, ip, '-exist'])
 
 
 # Remove an IP/CIDR from specified set
 def remove_ip(ip, ipset):
+    print("Removing IP: %s" % ip)
     bin = conf['ipset']['binary']
     subprocess.call([bin, 'del', ipset, ip, '-exist'])
 
