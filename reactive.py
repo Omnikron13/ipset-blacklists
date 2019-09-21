@@ -50,11 +50,12 @@ def process_ports_db(url):
 
 # Setup ipset sets used by the reactive firewall
 def create_ipsets():
+    prefix = conf['reactive']['ipset_prefix']
     name = conf['reactive']['ipset_ips']
     timeout = str(conf['reactive']['timeout'])
     ipset.create_hash_net(name, ['timeout', timeout])
-    ipset.create_bitmap_port(conf['reactive']['ipset_ports_tcp'])
-    ipset.create_bitmap_port(conf['reactive']['ipset_ports_udp'])
+    ipset.create_bitmap_port('%s.%s' % (prefix, 'TCP'))
+    ipset.create_bitmap_port('%s.%s' % (prefix, 'UDP'))
 
 
 

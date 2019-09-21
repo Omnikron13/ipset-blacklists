@@ -33,6 +33,9 @@ ipset_ips = 'Blacklist.Reactive'
 ipset_ports_tcp = 'Blacklist.Ports.TCP'
 ipset_ports_udp = 'Blacklist.Ports.UDP'
 
+# Prefix for the ipset sets names
+ipset_prefix = 'Blacklist.Ports'
+
 # This can be pointed at a local copy, if desired
 nmap-services_url = 'https://svn.nmap.org/nmap/nmap-services'
 
