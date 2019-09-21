@@ -36,3 +36,5 @@ ipset_ports_udp = 'Blacklist.Ports.UDP'
 # This can be pointed at a local copy, if desired
 nmap-services_url = 'https://svn.nmap.org/nmap/nmap-services'
 
+# Number of seconds to keep IPs auto-banned for
+timeout = 86400 # 24 hours
