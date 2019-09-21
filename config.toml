@@ -40,3 +40,12 @@ timeout = 86400 # 24 hours
 
 # Top X most common ports to be blacklisted
 count = 1000
+
+# Ports to be excluded from tcp blacklist
+whitelist_tcp = [
+    22, # SSH
+]
+
+# Ports to be excluded from udp blacklist
+whitelist_udp = [
+]
