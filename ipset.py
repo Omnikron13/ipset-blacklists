@@ -15,14 +15,12 @@ def create_bitmap_port(name):
 
 # Add to a specified set
 def add(ipset, data):
-    print("Adding: %s" % data)
     bin = conf['ipset']['binary']
     subprocess.call([bin, 'add', ipset, data, '-exist'])
 
 
 # Remove from a specified set
 def del(ipset, data):
-    print("Removing: %s" % data)
     bin = conf['ipset']['binary']
     subprocess.call([bin, 'del', ipset, data, '-exist'])
 
