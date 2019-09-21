@@ -6,7 +6,7 @@ import subprocess
 import toml
 from urllib.request import urlopen
 
-import diff from util
+from util import diff
 
 # Switch cwd to the dir this script is in, so config files etc. can be read
 # easily with relative paths.
