@@ -20,7 +20,7 @@ def add(ipset, data):
 
 
 # Remove from a specified set
-def del(ipset, data):
+def delete(ipset, data):
     bin = conf['ipset']['binary']
     subprocess.call([bin, 'del', ipset, data, '-exist'])
 
