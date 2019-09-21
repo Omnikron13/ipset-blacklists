@@ -120,5 +120,12 @@ def iptables_add_rule(rule):
     )
 
 
+# Add the iptables rules that actually match & block reactively
+def iptables_add_rules():
+    iptables_add_rule(iptables_rule_block_matches())
+    iptables_add_rule(iptables_rule_match_ports('tcp'))
+    iptables_add_rule(iptables_rule_match_ports('udp'))
+
+
 # Global to cache the downloaded & processed ports db
 db = process_ports_db(conf['reactive']['nmap-services_url'])
