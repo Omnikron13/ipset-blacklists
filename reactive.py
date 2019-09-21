@@ -59,7 +59,7 @@ def create_ipsets():
 
 
 # Remove old ports and add new ports to the set
-def update_ports(protocol):
+def update_ports(protocol, db):
     name = '%s.%s' % (conf['reactive']['ipset_prefix'], protocol.upper())
     ports = ipset.get_ports(name)
     blacklist = [i['port'] for i in db[protocol][0:conf['reactive']['count']]]
