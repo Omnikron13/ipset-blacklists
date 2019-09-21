@@ -127,5 +127,18 @@ def iptables_add_rules():
     iptables_add_rule(iptables_rule_match_ports('udp'))
 
 
+# Function which creates the firewall. This is the only function that really
+# needs calling, from an end-user perspective.
+def setup():
+    # Download and process data on common ports
+    db = process_ports_db(conf['reactive']['nmap-services_url'])
+
+    # Create and populate the ipsets
+    create_ipsets()
+    update_ports('tcp', db)
+    update_ports('udp', db)
+
+    # Create the iptables rules to match & block
+    iptables_add_rules()
 # Global to cache the downloaded & processed ports db
 db = process_ports_db(conf['reactive']['nmap-services_url'])
