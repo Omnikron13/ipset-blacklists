@@ -94,5 +94,18 @@ def iptables_rule_block_matches(cmd = 'A'):
     return f'-{cmd} {chain} -m set --match-set {ipset} src -j DROP'
 
 
+# Checks if a rule is already attached to the iptables chain
+def iptables_rule_exists(rule):
+    bin = conf['iptables']['binary']
+    r = subprocess.call(
+        [bin] + rule.split(),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    if r is 0:
+        return True
+    return False
+
+
 # Global to cache the downloaded & processed ports db
 db = process_ports_db(conf['reactive']['nmap-services_url'])
