@@ -4,11 +4,13 @@ binary = '/bin/ipset'
 # Prepended to the ipset set names (e.g. Blacklist.CINSArmy)
 prefix = 'Blacklist'
 
+
 [iptables]
 # Full path to the iptables binary
 binary = '/bin/iptables'
 # Name of the iptables chain to add the ipset blacklists to
 chain = 'BLACKLIST'
+
 
 [blacklists]
 # Large blacklist of 15,000 IPs, updated hourly
@@ -19,4 +21,18 @@ CINSArmy = 'http://cinsscore.com/list/ci-badguys.txt'
 
 # Bogons list from team-cymru.com, modified to remove 192.168.0.0/16 so LAN works properly
 bogons   = 'file:bogons.blacklist'
+
+
+# Configuration relating reactive firewall rules
+[reactive]
+
+# Set used to store IPs that have attemped to access blacklisted ports
+ipset_ips = 'Blacklist.Reactive'
+
+# Set used to store blacklisted ports
+ipset_ports_tcp = 'Blacklist.Ports.TCP'
+ipset_ports_udp = 'Blacklist.Ports.UDP'
+
+# This can be pointed at a local copy, if desired
+nmap-services_url = 'https://svn.nmap.org/nmap/nmap-services'
 
