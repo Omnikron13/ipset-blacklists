@@ -8,6 +8,7 @@ from urllib.request import urlopen
 
 import ipset
 from config import conf
+import diff from util
 
 
 # Regex to extract data from nmap-services file
