@@ -55,3 +55,7 @@ def create_ipsets():
     ipset.create_bitmap_port(conf['reactive']['ipset_ports_tcp'])
     ipset.create_bitmap_port(conf['reactive']['ipset_ports_udp'])
 
+
+
+# Global to cache the downloaded & processed ports db
+db = process_ports_db(conf['reactive']['nmap-services_url'])
