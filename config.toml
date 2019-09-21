@@ -29,10 +29,6 @@ bogons   = 'file:bogons.blacklist'
 # Set used to store IPs that have attemped to access blacklisted ports
 ipset_ips = 'Blacklist.Reactive'
 
-# Set used to store blacklisted ports
-ipset_ports_tcp = 'Blacklist.Ports.TCP'
-ipset_ports_udp = 'Blacklist.Ports.UDP'
-
 # Prefix for the ipset sets names
 ipset_prefix = 'Blacklist.Ports'
 
