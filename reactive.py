@@ -86,5 +86,13 @@ def iptables_rule_match_ports(protocol, cmd = 'A'):
     return f'-{cmd} {chain} -p {protocol} -m set --match-set {ipset_ports} dst -j SET --add-set {ipset_ips} src'
 
 
+# Returns a rule/argument string for blocking IPs which have triggered one of the
+# port matching rules
+def iptables_rule_block_matches(cmd = 'A'):
+    chain = conf['iptables']['chain']
+    ipset = conf['reactive']['ipset_ips']
+    return f'-{cmd} {chain} -m set --match-set {ipset} src -j DROP'
+
+
 # Global to cache the downloaded & processed ports db
 db = process_ports_db(conf['reactive']['nmap-services_url'])
