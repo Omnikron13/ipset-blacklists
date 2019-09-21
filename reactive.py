@@ -108,5 +108,17 @@ def iptables_rule_exists(rule):
     return False
 
 
+# Add a new rule to the iptables chain, failing silently if it already exists
+def iptables_add_rule(rule):
+    if iptables_rule_exists(rule):
+        return
+    bin = conf['iptables']['binary']
+    subprocess.call(
+        [bin] + rule.split(),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
 # Global to cache the downloaded & processed ports db
 db = process_ports_db(conf['reactive']['nmap-services_url'])
