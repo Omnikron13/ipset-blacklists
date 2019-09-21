@@ -6,6 +6,8 @@ import subprocess
 import toml
 from urllib.request import urlopen
 
+import diff from util
+
 # Switch cwd to the dir this script is in, so config files etc. can be read
 # easily with relative paths.
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
@@ -81,16 +83,6 @@ def add_ip(ip, ipset):
 def remove_ip(ip, ipset):
     bin = conf['ipset']['binary']
     subprocess.call([bin, 'del', ipset, ip, '-exist'])
-
-
-# Return set of items in a which are not in b
-def diff(a, b):
-    return {i for i in a if i not in b}
-
-
-# Complement to the diff() function above
-def intersect(a, b):
-    return {i for i in a if i in a and i in b}
 
 
 # Iterate ipsets dictionary and update ipsets based on the latest version of source lists.
