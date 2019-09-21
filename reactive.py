@@ -71,6 +71,19 @@ def update_ports(protocol):
     for p in diff(blacklist, ports):
         print("Adding port %s" % p)
         ipset.add(name, p)
+    # Removing whitelisted ports
+    for p in conf['reactive'][f'whitelist_{protocol}']:
+        print(f'Removing whitelisted port {p}')
+        ipset.delete(name, str(p))
+
+
+# Returns a rule/argument string for adding/checking/removing rules that check port
+# blacklists and add matching IPs to the reactive blacklist
+def iptables_rule_match_ports(protocol, cmd = 'A'):
+    chain = conf['iptables']['chain']
+    ipset_ports = '%s.%s' % (conf['reactive']['ipset_prefix'], protocol.upper())
+    ipset_ips = conf['reactive']['ipset_ips']
+    return f'-{cmd} {chain} -p {protocol} -m set --match-set {ipset_ports} dst -j SET --add-set {ipset_ips} src'
 
 
 # Global to cache the downloaded & processed ports db
