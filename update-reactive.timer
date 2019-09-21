@@ -1,0 +1,10 @@
+[Unit]
+Description=Monthly update of reactive firewall rules
+
+[Timer]
+OnCalendar=monthly
+Persistent=true
+
+[Install]
+WantedBy=timers.target
+

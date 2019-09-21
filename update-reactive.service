@@ -1,0 +1,11 @@
+[Unit]
+Description=Create or update the reactive firewall rules
+Requires=iptables.service
+Requires=ipset.service
+After=iptables.service
+After=ipset.service
+
+[Service]
+Type=simple
+ExecStart=/bin/python -c "import sys; sys.path.append('/usr/bin/ipset-blacklists'); import reactive; reactive.setup()"
+
