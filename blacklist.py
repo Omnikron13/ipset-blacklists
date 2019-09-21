@@ -6,15 +6,9 @@ import subprocess
 import toml
 from urllib.request import urlopen
 
+from config import conf
 from util import diff
 
-# Switch cwd to the dir this script is in, so config files etc. can be read
-# easily with relative paths.
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
-
-# Absolute paths should be used if changing this, unless the new file
-# is placed in this dir.
-CONFIG_FILE = 'config.toml'
 
 # This regex only really provides a rough matching capability, and will match
 # on numbers >255 & subnets >32, but is probably faster than being more anal.
@@ -22,9 +16,6 @@ CONFIG_FILE = 'config.toml'
 
 # This alternative is very strict about what it considers 'correct', but is somewhat slower.
 CIDR_REGEX = '^(?:(\d|[1-9]\d|1\d{2}|2[0-4]\d+|25[0-5])\.){3}(\d|[1-9]\d|1\d{2}|2[0-4]\d+|25[0-5])(?:\/([0-9]|[1-2]\d|3[0-2]))?$'
-
-# Make configuration settings globally available
-conf = toml.load(CONFIG_FILE)
 
 
 # Return a list of IPs/CIDR from a URL
