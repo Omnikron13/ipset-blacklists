@@ -58,6 +58,20 @@ def create_ipsets():
     ipset.create_bitmap_port('%s.%s' % (prefix, 'UDP'))
 
 
+# Remove old ports and add new ports to the set
+def update_ports(protocol):
+    name = '%s.%s' % (conf['reactive']['ipset_prefix'], protocol.upper())
+    ports = ipset.get_ports(name)
+    blacklist = [i['port'] for i in db[protocol][0:conf['reactive']['count']]]
+    # Remove old ports
+    for p in diff(ports, blacklist):
+        print("Removing port %s" % p)
+        ipset.delete(name, p)
+    # Add new ports
+    for p in diff(blacklist, ports):
+        print("Adding port %s" % p)
+        ipset.add(name, p)
+
 
 # Global to cache the downloaded & processed ports db
 db = process_ports_db(conf['reactive']['nmap-services_url'])
