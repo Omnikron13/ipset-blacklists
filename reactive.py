@@ -97,6 +97,7 @@ def iptables_rule_block_matches(cmd = 'A'):
 # Checks if a rule is already attached to the iptables chain
 def iptables_rule_exists(rule):
     bin = conf['iptables']['binary']
+    rule = rule.replace('-A', '-C', 1)
     r = subprocess.call(
         [bin] + rule.split(),
         stdout=subprocess.DEVNULL,
