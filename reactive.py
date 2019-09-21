@@ -138,5 +138,3 @@ def setup():
 
     # Create the iptables rules to match & block
     iptables_add_rules()
-# Global to cache the downloaded & processed ports db
-db = process_ports_db(conf['reactive']['nmap-services_url'])
