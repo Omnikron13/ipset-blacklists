@@ -54,7 +54,7 @@ def get_ipset(name):
 def set_ipset(name, blacklist):
     ipset_ips = get_ipset(name)
     for ip in diff(blacklist, ipset_ips):
-        print("Adding IP: %s" % ip)
+        print(f'Adding IP: {ip}')
         ipset.add(name, ip)
     for ip in diff(ipset_ips, blacklist):
         remove_ip(ip, name)
