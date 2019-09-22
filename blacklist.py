@@ -6,6 +6,7 @@ import subprocess
 import toml
 from urllib.request import urlopen
 
+import ipset
 from config import conf
 from util import diff
 
@@ -35,15 +36,9 @@ def download_list(url):
     return items
 
 
-# Adds a new set, failing silently if it already exists
-def create_ipset(name):
-    bin = conf['ipset']['binary']
-    subprocess.call([bin, 'create', name, 'hash:net', '-exist'])
-
-
 # Return (python) set containing the IPs from specified (ipset) set
 def get_ipset(name):
-    create_ipset(name)
+    ipset.create_hash_net(name)
     bin = conf['ipset']['binary']
     result = subprocess.run([bin, 'list', name], stdout=subprocess.PIPE)
     items = set()
