@@ -51,19 +51,13 @@ def get_ipset(name):
 
 
 # Update an ipset to match contents of given blacklist
-def set_ipset(ipsetname, blacklist):
-    ipset = get_ipset(ipsetname)
-    for ip in diff(blacklist, ipset):
-        add_ip(ip, ipsetname)
-    for ip in diff(ipset, blacklist):
-        remove_ip(ip, ipsetname)
-
-
-# Add an IP/CIDR to specified set
-def add_ip(ip, ipset):
-    print("Adding IP: %s" % ip)
-    bin = conf['ipset']['binary']
-    subprocess.call([bin, 'add', ipset, ip, '-exist'])
+def set_ipset(name, blacklist):
+    ipset_ips = get_ipset(name)
+    for ip in diff(blacklist, ipset_ips):
+        print("Adding IP: %s" % ip)
+        ipset.add(name, ip)
+    for ip in diff(ipset_ips, blacklist):
+        remove_ip(ip, name)
 
 
 # Remove an IP/CIDR from specified set
