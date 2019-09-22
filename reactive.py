@@ -52,8 +52,8 @@ def create_ipsets():
     name = conf['reactive']['ipset_ips']
     timeout = str(conf['reactive']['timeout'])
     ipset.create_hash_net(name, ['timeout', timeout])
-    ipset.create_bitmap_port('%s.%s' % (prefix, 'TCP'))
-    ipset.create_bitmap_port('%s.%s' % (prefix, 'UDP'))
+    ipset.create_bitmap_port(f'{prefix}.TCP')
+    ipset.create_bitmap_port(f'{prefix}.UDP')
 
 
 # Remove old ports and add new ports to the set
