@@ -23,15 +23,15 @@ def create_bitmap_port(name):
     subprocess.call(f'{bin} create {name} bitmap:port range 0-65535 -exist'.split())
 
 # Add to a specified set
-def add(ipset, data):
+def add(name, data):
     bin = conf['ipset']['binary']
-    subprocess.call([bin, 'add', ipset, data, '-exist'])
+    subprocess.call(f'{bin} add {name} {data} -exist'.split())
 
 
 # Remove from a specified set
-def delete(ipset, data):
+def delete(name, data):
     bin = conf['ipset']['binary']
-    subprocess.call([bin, 'del', ipset, data, '-exist'])
+    subprocess.call(f'{bin} del {name} {data} -exist'.split())
 
 
 # Returns a list of ports stored in the given set
