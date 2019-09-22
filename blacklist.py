@@ -11,14 +11,6 @@ from config import conf
 from util import diff
 
 
-# This regex only really provides a rough matching capability, and will match
-# on numbers >255 & subnets >32, but is probably faster than being more anal.
-#CIDR_REGEX = '^(?:\d{1,3}\.){3}\d{1,3}(?:/\d{1,2})?$'
-
-# This alternative is very strict about what it considers 'correct', but is somewhat slower.
-CIDR_REGEX = '^(?:(\d|[1-9]\d|1\d{2}|2[0-4]\d+|25[0-5])\.){3}(\d|[1-9]\d|1\d{2}|2[0-4]\d+|25[0-5])(?:\/([0-9]|[1-2]\d|3[0-2]))?$'
-
-
 # Return a list of IPs/CIDR from a URL
 def download_list(url):
     http = urlopen(url)
@@ -29,21 +21,7 @@ def download_list(url):
     items = set()
     for line in http:
         line = line.rstrip()
-        m = re.match(CIDR_REGEX, line.decode(charset))
-        if m is None:
-            continue
-        items.add(m.string)
-    return items
-
-
-# Return (python) set containing the IPs from specified (ipset) set
-def get_ipset(name):
-    ipset.create_hash_net(name)
-    bin = conf['ipset']['binary']
-    result = subprocess.run([bin, 'list', name], stdout=subprocess.PIPE)
-    items = set()
-    for line in result.stdout.splitlines():
-        m = re.match(CIDR_REGEX, line.decode())
+        m = re.match(ipset.CIDR_REGEX, line.decode(charset))
         if m is None:
             continue
         items.add(m.string)
@@ -52,7 +30,7 @@ def get_ipset(name):
 
 # Update an ipset to match contents of given blacklist
 def set_ipset(name, blacklist):
-    ipset_ips = get_ipset(name)
+    ipset_ips = ipset.get_ips(name)
     for ip in diff(blacklist, ipset_ips):
         print(f'Adding IP: {ip}')
         ipset.add(name, ip)
