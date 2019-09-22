@@ -63,11 +63,11 @@ def update_ports(protocol, db):
     blacklist = [i['port'] for i in db[protocol][0:conf['reactive']['count']]]
     # Remove old ports
     for p in diff(ports, blacklist):
-        print("Removing port %s" % p)
+        print(f'Removing port {p}')
         ipset.delete(name, p)
     # Add new ports
     for p in diff(blacklist, ports):
-        print("Adding port %s" % p)
+        print(f'Adding port {p}')
         ipset.add(name, p)
     # Removing whitelisted ports
     for p in conf['reactive'][f'whitelist_{protocol}']:
