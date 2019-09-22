@@ -57,14 +57,8 @@ def set_ipset(name, blacklist):
         print(f'Adding IP: {ip}')
         ipset.add(name, ip)
     for ip in diff(ipset_ips, blacklist):
-        remove_ip(ip, name)
-
-
-# Remove an IP/CIDR from specified set
-def remove_ip(ip, ipset):
-    print("Removing IP: %s" % ip)
-    bin = conf['ipset']['binary']
-    subprocess.call([bin, 'del', ipset, ip, '-exist'])
+        print(f'Removing IP: {ip}')
+        ipset.delete(name, ip)
 
 
 # Iterate ipsets dictionary and update ipsets based on the latest version of source lists.
