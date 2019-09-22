@@ -20,7 +20,7 @@ def create_hash_net(name, extra=''):
 # Adds a new bitmap:port set, failing silently if it already exists
 def create_bitmap_port(name):
     bin = conf['ipset']['binary']
-    subprocess.call([bin, 'create', name, 'bitmap:port', 'range', '0-65535', '-exist'])
+    subprocess.call(f'{bin} create {name} bitmap:port range 0-65535 -exist'.split())
 
 # Add to a specified set
 def add(ipset, data):
