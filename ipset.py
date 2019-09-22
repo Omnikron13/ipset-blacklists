@@ -13,9 +13,9 @@ CIDR_REGEX = '^(?:(\d|[1-9]\d|1\d{2}|2[0-4]\d+|25[0-5])\.){3}(\d|[1-9]\d|1\d{2}|
 
 
 # Adds a new hash:net set, failing silently if it already exists
-def create_hash_net(name, extra=[]):
+def create_hash_net(name, extra=''):
     bin = conf['ipset']['binary']
-    subprocess.call([bin, 'create', name, 'hash:net', '-exist'] + extra)
+    subprocess.call(f'{bin} create {name} hash:net -exist {extra}'.split())
 
 # Adds a new bitmap:port set, failing silently if it already exists
 def create_bitmap_port(name):

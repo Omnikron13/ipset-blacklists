@@ -51,7 +51,7 @@ def create_ipsets():
     prefix = conf['reactive']['ipset_prefix']
     name = conf['reactive']['ipset_ips']
     timeout = str(conf['reactive']['timeout'])
-    ipset.create_hash_net(name, ['timeout', timeout])
+    ipset.create_hash_net(name, f'timeout {timeout}')
     ipset.create_bitmap_port(f'{prefix}.TCP')
     ipset.create_bitmap_port(f'{prefix}.UDP')
 
